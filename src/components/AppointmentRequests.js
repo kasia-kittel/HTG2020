@@ -260,10 +260,14 @@ const useFetch = url => {
   };
 
   useEffect(() => {
-    fetchRequestedAppointments();
-  }, []);
+    const timer = setInterval(() => {
+      fetchRequestedAppointments();
+    }, 3000);
 
+    return () => clearInterval(timer);
+    }, []);
   return { data, loading };
+
 };
 
 const AppointmentRequests = (props) => {
